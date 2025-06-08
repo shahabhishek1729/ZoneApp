@@ -22,18 +22,13 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
                 color: .white
             ),
             subtitle: ShieldConfiguration.Label(
-                text: "Managed by YourAppName",
+                text: "Managed by Zone",
                 color: .white.withAlphaComponent(0.8)
             ),
             primaryButtonLabel: ShieldConfiguration.Label(
-                text: "Ask for More Time",
+                text: "Ok",
                 color: .white
             ),
-            primaryButtonBackgroundColor: UIColor.systemGreen,
-            secondaryButtonLabel: ShieldConfiguration.Label(
-                text: "Ignore Limit",
-                color: .white
-            )
         )
     }
 }
