@@ -5,8 +5,6 @@
 //  Created by Abhishek on 6/8/25.
 //
 
-
-// In your ShieldConfigurationExtension
 import ManagedSettings
 import ManagedSettingsUI
 import UIKit
