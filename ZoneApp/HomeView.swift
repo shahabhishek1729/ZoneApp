@@ -6,6 +6,7 @@
 ////
 //
 import SwiftUI
+import FamilyControls
 //
 //struct HomeView: View {
 //    @State private var focusProgress: Double = 0.77
@@ -205,6 +206,11 @@ struct HomeView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var focusProgress: Double = 0.77
     @State private var showCreateZone = false
+    
+    @Binding var isPresented: Bool
+    @Binding var selection: FamilyActivitySelection
+    let addZone: (Double, Double, Double, String) -> Void
+
     var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: true) {       // ← scrollable
@@ -410,7 +416,7 @@ struct HomeView: View {
         }
         .padding([.bottom, .trailing], 24)
         .sheet(isPresented: $showCreateZone) {
-            // CreateZoneView()
+            CreateZoneView(isPresented: $isPresented, selection: $selection, addZone: addZone)
         }
     }
 }

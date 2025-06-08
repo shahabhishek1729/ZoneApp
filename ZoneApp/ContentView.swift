@@ -360,7 +360,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            HomeView()      .tabItem { Label("Home",      systemImage: "house") }
+            HomeView(isPresented: $isPresented, selection: $selection, addZone: addZone)      .tabItem { Label("Home",      systemImage: "house") }
             ZonesView(isPresented: $isPresented, selection: $selection, addZone: addZone)     .tabItem { Label("Zones",     systemImage: "mappin.and.ellipse") }
             AnalyticsView() .tabItem { Label("Analytics", systemImage: "chart.bar.xaxis") }
             ProfileView()   .tabItem { Label("Profile",   systemImage: "person") }
