@@ -464,16 +464,6 @@ struct AddressSearchMapView: View {
                                 .onTapGesture {
                                     showingResults = !searchText.isEmpty
                                 }
-                            
-                            if !searchText.isEmpty {
-                                Button("Clear") {
-                                    searchText = ""
-                                    showingResults = false
-                                    locationManager.searchResults = []
-                                }
-                                .foregroundColor(.blue)
-                                .font(.caption)
-                            }
                         }
                         .padding()
                         .background(Color(.systemBackground))
@@ -504,7 +494,11 @@ struct AddressSearchMapView: View {
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                             .padding(.vertical, 12)
                                             .padding(.horizontal, 16)
+                                            .onTapGesture {
+                                                selectAddress(result)
+                                            }
                                         }
+                                        .contentShape(Rectangle())
                                         .buttonStyle(PlainButtonStyle())
                                         
                                         if result != locationManager.searchResults.last {
@@ -598,12 +592,6 @@ struct AddressSearchMapView: View {
             }
             .navigationTitle("Address Search")
             .navigationBarTitleDisplayMode(.inline)
-        }
-        .onTapGesture {
-            // Hide search results when tapping outside
-            if showingResults {
-                showingResults = false
-            }
         }
     }
     
