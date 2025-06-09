@@ -476,6 +476,7 @@ struct AddressSearchMapView: View {
                                 LazyVStack(alignment: .leading, spacing: 0) {
                                     ForEach(locationManager.searchResults) { result in
                                         Button(action: {
+                                            print("Clicked!")
                                             selectAddress(result)
                                         }) {
                                             VStack(alignment: .leading, spacing: 4) {
@@ -494,13 +495,15 @@ struct AddressSearchMapView: View {
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                             .padding(.vertical, 12)
                                             .padding(.horizontal, 16)
+                                            .background(Color(hex: "#FFFFFF"))
                                             .onTapGesture {
                                                 selectAddress(result)
                                             }
                                         }
                                         .contentShape(Rectangle())
                                         .buttonStyle(PlainButtonStyle())
-                                        
+                                        .background(Color(hex: "#FFFFFF"))
+
                                         if result != locationManager.searchResults.last {
                                             Divider()
                                         }
