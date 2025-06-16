@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B399CE62DFA7A090022C339 /* Location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6B399CE52DFA7A090022C339 /* Location.gpx */; };
 		6B42D9B12DECA29000A10C8E /* ScreenTime.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 6B42D9A52DECA29000A10C8E /* ScreenTime.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6B64F6F02DFAFD4A009E66AC /* CTP.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 6B64F6EF2DFAFD4A009E66AC /* CTP.gpx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,8 +37,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6B399CE52DFA7A090022C339 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 		6B42D9A52DECA29000A10C8E /* ScreenTime.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = ScreenTime.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B4BB83C2DD925DE00AF96ED /* ZoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B64F6EF2DFAFD4A009E66AC /* CTP.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CTP.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -96,6 +100,8 @@
 		6B4BB8332DD925DE00AF96ED = {
 			isa = PBXGroup;
 			children = (
+				6B64F6EF2DFAFD4A009E66AC /* CTP.gpx */,
+				6B399CE52DFA7A090022C339 /* Location.gpx */,
 				6B4BB83E2DD925DE00AF96ED /* ZoneApp */,
 				6B42D9A62DECA29000A10C8E /* ScreenTime */,
 				6B4BB83D2DD925DE00AF96ED /* Products */,
@@ -203,6 +209,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B399CE62DFA7A090022C339 /* Location.gpx in Resources */,
+				6B64F6F02DFAFD4A009E66AC /* CTP.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

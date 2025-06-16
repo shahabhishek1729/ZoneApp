@@ -23,6 +23,7 @@ import Charts
 @main
 struct ZoneAppApp: App {
     @StateObject private var zoneStore = ZoneStore()
+    
     var body: some Scene {
         WindowGroup {
             ZoneRootView()

@@ -99,6 +99,16 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.startMonitoring(for: region)
     }
     
+    func stopMonitoring(name: String) {
+        let regions = locationManager.monitoredRegions.filter { region in
+            return region.identifier == name
+        }
+        
+        for region in regions {
+            locationManager.stopMonitoring(for: region)
+        }
+    }
+
     // MARK: - CLLocationManagerDelegate
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

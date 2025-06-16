@@ -119,6 +119,7 @@ import CoreLocation
 import SwiftUI
 import Charts
 import MapKit
+
 // MARK:- Splash View
 struct SplashView: View {
     @Binding var isActive: Bool
@@ -144,10 +145,12 @@ struct SplashView: View {
         }
     }
 }
+
 // MARK:- App Entry
 class ZoneStore: ObservableObject {
     @Published var zones: [Zone] = sampleZones
 }
+
 struct ZoneRootView: View {
     @AppStorage("isDarkMode") private var storedDarkMode = false
     @EnvironmentObject var zoneStore: ZoneStore
@@ -164,6 +167,7 @@ struct ZoneRootView: View {
         .preferredColorScheme(storedDarkMode ? .dark : .light)
     }
 }
+
 //@main
 //struct ZoneApp: App {
 //}
@@ -341,11 +345,7 @@ struct ProgressRing: View {
     }
 }
 // MARK:- Create ZoneView & ZoneType (global scope)
-enum ZoneType: String, CaseIterable, Identifiable {
-    case gps = "GPS"
-    case ble = "BLE"
-    var id: String { rawValue }
-}
+
 struct IdentifiableDay: Identifiable {
     var id: String { day }
     let day: String
@@ -361,7 +361,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             HomeView(isPresented: $isPresented, selection: $selection, addZone: addZone)      .tabItem { Label("Home",      systemImage: "house") }
-            ZonesView(isPresented: $isPresented, selection: $selection, addZone: addZone)     .tabItem { Label("Zones",     systemImage: "mappin.and.ellipse") }
+            ZonesView(isPresented: $isPresented, selection: $selection, addZone: addZone, removeZone: removeZone)     .tabItem { Label("Zones",     systemImage: "mappin.and.ellipse") }
             AnalyticsView() .tabItem { Label("Analytics", systemImage: "chart.bar.xaxis") }
             ProfileView()   .tabItem { Label("Profile",   systemImage: "person") }
         }
@@ -411,13 +411,19 @@ struct ContentView: View {
             blockSelectedApps(selection: selection)
         }, onExit_: { _ in unblockAll() })
     }
+    
+    private func removeZone(name: String) {
+        // Example: Home location
+        locationManager.stopMonitoring(name: name)
+    }
 }
 // MARK:- ZONES (scroll enabled)
 struct ZonesView: View {
     @Binding var isPresented: Bool
     @Binding var selection: FamilyActivitySelection
     let addZone: (Double, Double, Double, String) -> Void
-    
+    let removeZone: (String) -> Void
+
     @EnvironmentObject var zoneStore: ZoneStore
     @State private var showCreateZone = false
     var body: some View {
@@ -425,7 +431,12 @@ struct ZonesView: View {
             ScrollView(.vertical, showsIndicators: true) {         // ← scrollable
                 VStack(spacing: 16) {
                     filters
-                    ForEach(zoneStore.zones) { ZoneCard(zone: $0) }
+                    ForEach(zoneStore.zones) { ZoneCard(zone: $0, removeZone: { (name: String) -> Void in
+                        removeZone(name)
+                        zoneStore.zones.removeAll { z in
+                            z.name == name
+                        }
+                    }) }
                 }
                 .padding()
             }
@@ -469,6 +480,8 @@ struct ZonesView: View {
 }
 struct ZoneCard: View {
     let zone: Zone
+    let removeZone: (String) -> Void
+    
     var body: some View {
         Card {
             HStack(alignment: .top, spacing: 12) {
@@ -499,7 +512,16 @@ struct ZoneCard: View {
                 Spacer()
                 VStack(spacing: 8) {
                     Button {} label: { Image(systemName: "pencil") }
-                    Button {} label: { Image(systemName: "ellipsis") }
+                    Menu {
+                        Button(role: .destructive) {
+                            // Add your delete action here
+                            removeZone(zone.name)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                    }
                 }
                 .foregroundColor(.textSecondary)
             }

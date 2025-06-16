@@ -6,6 +6,7 @@
 ////
 //
 import SwiftUI
+import SwiftData
 //
 //// MARK:- Mock Models & Data (unchanged)
 //struct Zone: Identifiable {
@@ -15,12 +16,23 @@ import SwiftUI
 //    var successRate:Double; var radiusDescription:String; var isActive:Bool
 //}
 // MARK:- Mock Models & Data (unchanged)
+
 struct Zone: Identifiable {
-    enum ZoneType:String{case gps,ble}
-    var id = UUID()
-    var name:String; var type:ZoneType; var lastActive:String
-    var successRate:Double; var radiusDescription:String; var isActive:Bool
+    var id = UUID();
+    var name: String;
+    var type: ZoneType;
+    var lastActive: String
+    var successRate: Double;
+    var radiusDescription: String;
+    var isActive: Bool;
 }
+
+enum ZoneType: String, CaseIterable, Identifiable {
+    case gps = "GPS"
+    case ble = "BLE"
+    var id: String { rawValue }
+}
+
 let sampleZones:[Zone] = [
     .init(name:"Home Office", type:.gps,
           lastActive:"Today 10:45 AM", successRate:0.92,
