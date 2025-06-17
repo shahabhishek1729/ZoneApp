@@ -361,7 +361,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             HomeView(isPresented: $isPresented, selection: $selection, addZone: addZone)      .tabItem { Label("Home",      systemImage: "house") }
-            ZonesView(isPresented: $isPresented, selection: $selection, addZone: addZone, removeZone: removeZone)     .tabItem { Label("Zones",     systemImage: "mappin.and.ellipse") }
+            ZonesView(isPresented: $isPresented, selection: $selection, addZone: addZone, removeZone: removeZone, unblockAll: unblockAll)     .tabItem { Label("Zones",     systemImage: "mappin.and.ellipse") }
             AnalyticsView() .tabItem { Label("Analytics", systemImage: "chart.bar.xaxis") }
             ProfileView()   .tabItem { Label("Profile",   systemImage: "person") }
         }
@@ -423,6 +423,7 @@ struct ZonesView: View {
     @Binding var selection: FamilyActivitySelection
     let addZone: (Double, Double, Double, String) -> Void
     let removeZone: (String) -> Void
+    let unblockAll: () -> Void
 
     @EnvironmentObject var zoneStore: ZoneStore
     @State private var showCreateZone = false
@@ -436,6 +437,7 @@ struct ZonesView: View {
                         zoneStore.zones.removeAll { z in
                             z.name == name
                         }
+                        unblockAll()
                     }) }
                 }
                 .padding()

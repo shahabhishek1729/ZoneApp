@@ -104,6 +104,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             return region.identifier == name
         }
         
+        print(regions)
+        
         for region in regions {
             locationManager.stopMonitoring(for: region)
         }
