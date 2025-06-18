@@ -415,6 +415,7 @@ struct ContentView: View {
     private func removeZone(name: String) {
         // Example: Home location
         locationManager.stopMonitoring(name: name)
+        selection = FamilyActivitySelection()
     }
 }
 // MARK:- ZONES (scroll enabled)
